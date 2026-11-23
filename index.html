@@ -141,6 +141,48 @@ button{font:inherit;cursor:pointer}
 .ded-2 svg{width:28px;height:28px;flex:none}
 .ded-3{font-size:clamp(14px,3.5vw,15.5px);color:#7d6236}
 
+
+/* ===== ظرف الجمعة (من مغرب الخميس إلى مغرب الجمعة تقريبًا) ===== */
+.fri-head{display:none;text-align:center;margin:6px 0 0;position:relative;z-index:3}
+body.friday .fri-head{display:block}
+.fri-head .t{display:flex;align-items:center;justify-content:center;gap:8px;font-family:"Aref Ruqaa",serif;font-weight:700;font-size:clamp(30px,8.5vw,42px);color:var(--brown2);line-height:1.3}
+.fri-head .t svg{width:26px;height:26px}
+.fri-head .s{font-size:clamp(15px,3.9vw,17px);color:var(--muted)}
+body.friday::before{content:"";position:fixed;left:0;right:0;top:0;height:420px;z-index:1;pointer-events:none;opacity:.55;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44'%3E%3Cg transform='translate(22 22)' fill='none' stroke='%23e9c46a' stroke-width='1'%3E%3Crect x='-9' y='-9' width='18' height='18'/%3E%3Crect x='-9' y='-9' width='18' height='18' transform='rotate(45)'/%3E%3C/g%3E%3C/svg%3E");
+  -webkit-mask-image:linear-gradient(#000,transparent);mask-image:linear-gradient(#000,transparent)}
+body.friday .env-back{background:linear-gradient(#f3c650,#d99a1c);box-shadow:inset 0 0 0 1px #c98d12}
+body.friday .center{padding-top:clamp(26px,5vh,64px)}
+body.friday .pocket polygon:nth-of-type(1),body.friday .pocket polygon:nth-of-type(2){fill:#f6d98a;stroke:#d9ae45}
+body.friday .pocket polygon:nth-of-type(3){fill:#fbe7ae;stroke:#d9ae45}
+body.friday .flap .outer polygon{fill:#f9e2a2;stroke:#d2a43a}
+body.friday .to{color:#4a2a08}
+.fri-ribbon{display:none;position:absolute;top:-4%;left:-2%;z-index:8;align-items:center;gap:6px;background:#2f6b3a;color:#fff;font:700 clamp(12px,3.4vw,14px) "Amiri",serif;padding:6px 12px;border-radius:12px;box-shadow:0 6px 14px rgba(30,70,35,.3);transition:opacity .4s ease}
+.fri-ribbon svg{width:14px;height:14px}
+body.friday .fri-ribbon{display:flex}
+.opening .fri-ribbon{opacity:0}
+.fri-chip{display:none;align-self:center;align-items:center;gap:6px;margin:0 auto 10px;background:#2f6b3a;color:#fff;font:700 14px "Amiri",serif;padding:5px 14px;border-radius:999px;position:relative;z-index:2}
+.fri-chip svg{width:14px;height:14px}
+.vcard.is-fri .fri-chip{display:inline-flex}
+.fri-extras{display:none;width:min(100%,600px);margin-top:16px;flex-direction:column;gap:12px}
+body.friday .fri-extras{display:flex}
+.salawat{background:#eef7ea;border:1px solid #c9e2b6;border-radius:20px;padding:16px;text-align:center}
+.salawat .h{font-family:"Aref Ruqaa",serif;font-weight:700;font-size:21px;color:#24502c}
+.salawat p{margin:4px 0 10px;font-size:17px;color:#2c4a22}
+.salawat button{border:0;border-radius:999px;min-height:46px;padding:0 22px;background:#2f6b3a;color:#fff;font:700 16px "Amiri",serif;transition:transform .15s ease}
+.salawat button:active{transform:scale(.96)}
+.salawat .c{min-height:22px;margin-top:8px;font-size:14px;color:#3c6a2c}
+.kahf{display:flex;align-items:center;gap:12px;background:var(--paper);border:1px solid #f1dfa9;border-radius:18px;padding:12px 14px;text-decoration:none;color:inherit}
+.kahf .i{flex:none;width:42px;height:42px;border-radius:50%;background:linear-gradient(#ffd85a,#f3a610);display:grid;place-items:center}
+.kahf b{display:block;font-size:17px;color:var(--brown2)}
+.kahf small{font-size:14px;color:var(--muted)}
+/* ===== حديقة الأجر (سطر مختصر تحت الآية) ===== */
+.gline{display:flex;align-items:center;justify-content:center;gap:8px;margin:12px auto 2px;font-size:clamp(15.5px,4.2vw,17.5px);color:var(--brown);opacity:0;transform:translateY(6px);transition:opacity .8s ease,transform .8s ease}
+.gline[hidden]{display:none}
+.gline.show{opacity:1;transform:none}
+.gline b{color:#b8860b;font-size:1.12em}
+.gline svg{width:26px;height:26px;flex:none;transform:scale(0);transition:transform 1.2s cubic-bezier(.2,1.5,.4,1) .2s}
+.gline.show svg{transform:scale(1)}
 @media (prefers-reduced-motion:reduce){.sway,.nod,.petal,.open-btn::after{animation:none!important}.petal{display:none}}
 </style>
 </head>
@@ -150,6 +192,7 @@ button{font:inherit;cursor:pointer}
 
 <main class="stage" id="stage">
   <div class="top"><div class="bas">بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ</div></div>
+  <div class="fri-head"><div class="t"><span style="color:#b77d0c;display:flex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span>جمعةٌ مباركة</div><div class="s">في يوم الجمعة… ظرفٌ خاص بآيةٍ من سورة الكهف</div></div>
 
   <div class="center">
     <!-- الظرف -->
@@ -192,6 +235,7 @@ button{font:inherit;cursor:pointer}
           </div>
           <div class="seal" id="seal"></div>
         </div>
+        <div class="fri-ribbon"><span style="color:#f1cd6b;display:flex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span><span>ظرف الجمعة</span></div>
         <div class="env-sprig" id="sprig"></div>
       </div>
       <div class="under">
@@ -203,10 +247,12 @@ button{font:inherit;cursor:pointer}
     <!-- بطاقة الآية -->
     <div class="card-zone" aria-live="polite">
       <article class="vcard" id="vcard">
+        <div style="text-align:center"><span class="fri-chip"><span style="color:#f1cd6b;display:flex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span>آية الجمعة · سورة الكهف</span></div>
         <div class="vc-label">قال الله تعالى</div>
         <div class="orn" id="orn"></div>
         <p class="vc-text" id="vText"></p>
         <div class="vc-ref" id="vRef"></div>
+        <div class="gline" id="gline" hidden><svg viewBox="-100 -100 200 200" aria-hidden="true"><use href="#sf" x="-100" y="-100" width="200" height="200"/></svg><span>نبتت زهرتك رقم <b id="gnum"></b> في حديقة الأجر</span></div>
         <div class="vc-actions">
           <button class="open-btn" id="againBtn" type="button">افتح ظرفًا آخر</button>
           <button class="tb" id="listenBtn" type="button" aria-pressed="false"><span class="ic">▶</span> <span class="lb">استمع للآية</span></button>
@@ -216,6 +262,10 @@ button{font:inherit;cursor:pointer}
         <div class="vc-reciter"><label for="reciterSel">بصوت القارئ:</label><select id="reciterSel" class="rsel"></select></div>
         <div class="vc-count">آيةٌ من <b id="poolCount"></b> آية في هذا الظرف</div>
       </article>
+      <div class="fri-extras">
+        <div class="salawat"><div class="h">في يوم الجمعة</div><p>أكثِروا من الصلاة على النبي ﷺ</p><button type="button" id="salBtn">اللهم صلِّ وسلِّم على نبينا محمد</button><div class="c" id="salC" aria-live="polite"></div></div>
+        <a class="kahf" href="https://quran.com/18"><span class="i"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#4a2a08" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span style="flex:1;text-align:right"><b>اقرأ سورة الكهف كاملة</b><small>من سنن يوم الجمعة</small></span></a>
+      </div>
     </div>
   </div>
 
@@ -313,7 +363,7 @@ function nextVerse(){
 }
 let current=null;
 function showVerse(v){
-  stopAudio();current=v;const [surah,n,text]=v;const L=text.length;
+  stopAudio();current=v;document.getElementById("vcard").classList.toggle("is-fri",!!v.fri);const [surah,n,text]=v;const L=text.length;
   const base=Math.max(23,Math.min(34,innerWidth*0.068));
   const f=L>600?.66:L>450?.74:L>320?.82:L>200?.9:L<60?1.12:1;
   const el=document.getElementById("vText");
@@ -326,9 +376,9 @@ function showVerse(v){
 const stage=document.getElementById("stage"),env=document.getElementById("env");let busy=false;
 function openEnvelope(){
   if(busy||stage.classList.contains("revealed"))return;busy=true;
-  const v=nextVerse();
+  const v=(window.fridayPick&&window.fridayPick())||nextVerse();
   stage.classList.add("opening");env.classList.add("open");
-  setTimeout(()=>{showVerse(v);stage.classList.add("revealed");busy=false;
+  setTimeout(()=>{showVerse(v);stage.classList.add("revealed");busy=false;window.onReveal&&window.onReveal();
     const c=document.querySelector(".card-zone").getBoundingClientRect();if(c.top<0||c.top>innerHeight*.6)scrollTo({top:scrollY+c.top-20,behavior:"smooth"})},REDUCE?300:2150);
 }
 function anotherEnvelope(){
@@ -386,6 +436,40 @@ document.getElementById("copyBtn").addEventListener("click",async e=>{
   try{await navigator.clipboard.writeText(t);b.textContent="تم النسخ ✓"}catch(err){b.textContent="تعذّر النسخ"}
   setTimeout(()=>b.textContent="نسخ الآية",1800);
 });
+</script>
+<script>
+(function(){
+  const AR2=n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+  /* ----- ظرف الجمعة: من السادسة مساء الخميس إلى السادسة مساء الجمعة حسب ساعة الزائر ----- */
+  const now=new Date(),day=now.getDay(),hr=now.getHours();
+  const FRIDAY=/[?&]jumua\b/.test(location.search)||(day===4&&hr>=18)||(day===5&&hr<18);
+  let sal=0;const salC=document.getElementById("salC");
+  document.getElementById("salBtn").addEventListener("click",()=>{sal++;salC.textContent=`صلّيتَ على النبي ﷺ ${sal===1?"مرة واحدة":sal===2?"مرتين":AR2(sal)+(sal<=10?" مرات":" مرة")} — صلّى الله عليه وسلّم`});
+  if(FRIDAY){
+    const FRI=[10,30,46,107].map(n=>{const v=POOL.find(p=>p[3]===18&&p[1]===n);const c=v?v.slice():null;if(c)c.fri=true;return c}).filter(Boolean);
+    let friShown=false;
+    window.fridayPick=function(){if(friShown||!FRI.length)return null;friShown=true;return FRI[Math.floor(Math.random()*FRI.length)]};
+    document.body.classList.add("friday");
+    document.querySelector(".to").innerHTML='رسالة الجمعة<small>من سورة الكهف</small>';
+    document.getElementById("openBtn").textContent="افتح ظرف الجمعة";
+    document.querySelector(".under .hint").textContent="في يوم الجمعة… آيةٌ من سورة الكهف";
+    document.getElementById("seal").innerHTML=`<svg viewBox="-50 -50 100 100"><defs><radialGradient id="wxg" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#3f8a4c"/><stop offset=".6" stop-color="#2a6436"/><stop offset="1" stop-color="#173d20"/></radialGradient></defs><circle r="46" fill="url(#wxg)"/><circle r="35" fill="none" stroke="#e8c76a" stroke-opacity=".7" stroke-width="1.6"/><path d="M8,-20 A21,21 0 1,0 8,20 A16.5,16.5 0 1,1 8,-20Z" fill="#f1cd6b"/><path d="M12,-12 l2.2,5 5,2.2 -5,2.2 -2.2,5 -2.2,-5 -5,-2.2 5,-2.2z" fill="#f1cd6b"/><ellipse cx="-16" cy="-20" rx="13" ry="6" fill="#fff" opacity=".16" transform="rotate(-30 -16 -20)"/></svg>`;
+  }
+  /* ----- حديقة الأجر: زهرة واحدة لكل زيارة يُفتح فيها الظرف ----- */
+  const gl=document.getElementById("gline"),gn=document.getElementById("gnum");let counted=false;
+  window.onReveal=function(){
+    if(counted)return;counted=true;
+    try{
+      const ctl=window.AbortController?new AbortController():null;const tm=setTimeout(()=>{ctl&&ctl.abort()},6000);
+      fetch("https://abacus.jasoncameron.dev/hit/ayat-li-abi.com/garden",{cache:"no-store",signal:ctl?ctl.signal:undefined})
+        .then(r=>r.ok?r.json():Promise.reject(r.status))
+        .then(d=>{clearTimeout(tm);const n=Number(d&&d.value);if(!(n>0))return;
+          gn.textContent=AR2(n.toLocaleString("en").replace(/,/g,"٬"));gl.hidden=false;
+          requestAnimationFrame(()=>requestAnimationFrame(()=>gl.classList.add("show")))})
+        .catch(()=>{});
+    }catch(e){}
+  };
+})();
 </script>
 </body>
 </html>
