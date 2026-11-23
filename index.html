@@ -176,13 +176,6 @@ body.friday .fri-extras{display:flex}
 .kahf .i{flex:none;width:42px;height:42px;border-radius:50%;background:linear-gradient(#ffd85a,#f3a610);display:grid;place-items:center}
 .kahf b{display:block;font-size:17px;color:var(--brown2)}
 .kahf small{font-size:14px;color:var(--muted)}
-/* ===== حديقة الأجر (سطر مختصر تحت الآية) ===== */
-.gline{display:flex;align-items:center;justify-content:center;gap:8px;margin:12px auto 2px;font-size:clamp(15.5px,4.2vw,17.5px);color:var(--brown);opacity:0;transform:translateY(6px);transition:opacity .8s ease,transform .8s ease}
-.gline[hidden]{display:none}
-.gline.show{opacity:1;transform:none}
-.gline b{color:#b8860b;font-size:1.12em}
-.gline svg{width:26px;height:26px;flex:none;transform:scale(0);transition:transform 1.2s cubic-bezier(.2,1.5,.4,1) .2s}
-.gline.show svg{transform:scale(1)}
 @media (prefers-reduced-motion:reduce){.sway,.nod,.petal,.open-btn::after{animation:none!important}.petal{display:none}}
 </style>
 </head>
@@ -252,7 +245,6 @@ body.friday .fri-extras{display:flex}
         <div class="orn" id="orn"></div>
         <p class="vc-text" id="vText"></p>
         <div class="vc-ref" id="vRef"></div>
-        <div class="gline" id="gline" hidden><svg viewBox="-100 -100 200 200" aria-hidden="true"><use href="#sf" x="-100" y="-100" width="200" height="200"/></svg><span>نبتت زهرتك رقم <b id="gnum"></b> في حديقة الأجر</span></div>
         <div class="vc-actions">
           <button class="open-btn" id="againBtn" type="button">افتح ظرفًا آخر</button>
           <button class="tb" id="listenBtn" type="button" aria-pressed="false"><span class="ic">▶</span> <span class="lb">استمع للآية</span></button>
@@ -378,7 +370,7 @@ function openEnvelope(){
   if(busy||stage.classList.contains("revealed"))return;busy=true;
   const v=(window.fridayPick&&window.fridayPick())||nextVerse();
   stage.classList.add("opening");env.classList.add("open");
-  setTimeout(()=>{showVerse(v);stage.classList.add("revealed");busy=false;window.onReveal&&window.onReveal();
+  setTimeout(()=>{showVerse(v);stage.classList.add("revealed");busy=false;
     const c=document.querySelector(".card-zone").getBoundingClientRect();if(c.top<0||c.top>innerHeight*.6)scrollTo({top:scrollY+c.top-20,behavior:"smooth"})},REDUCE?300:2150);
 }
 function anotherEnvelope(){
@@ -455,20 +447,6 @@ document.getElementById("copyBtn").addEventListener("click",async e=>{
     document.querySelector(".under .hint").textContent="في يوم الجمعة… آيةٌ من سورة الكهف";
     document.getElementById("seal").innerHTML=`<svg viewBox="-50 -50 100 100"><defs><radialGradient id="wxg" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#3f8a4c"/><stop offset=".6" stop-color="#2a6436"/><stop offset="1" stop-color="#173d20"/></radialGradient></defs><circle r="46" fill="url(#wxg)"/><circle r="35" fill="none" stroke="#e8c76a" stroke-opacity=".7" stroke-width="1.6"/><path d="M8,-20 A21,21 0 1,0 8,20 A16.5,16.5 0 1,1 8,-20Z" fill="#f1cd6b"/><path d="M12,-12 l2.2,5 5,2.2 -5,2.2 -2.2,5 -2.2,-5 -5,-2.2 5,-2.2z" fill="#f1cd6b"/><ellipse cx="-16" cy="-20" rx="13" ry="6" fill="#fff" opacity=".16" transform="rotate(-30 -16 -20)"/></svg>`;
   }
-  /* ----- حديقة الأجر: زهرة واحدة لكل زيارة يُفتح فيها الظرف ----- */
-  const gl=document.getElementById("gline"),gn=document.getElementById("gnum");let counted=false;
-  window.onReveal=function(){
-    if(counted)return;counted=true;
-    try{
-      const ctl=window.AbortController?new AbortController():null;const tm=setTimeout(()=>{ctl&&ctl.abort()},6000);
-      fetch("https://abacus.jasoncameron.dev/hit/ayat-li-abi.com/garden",{cache:"no-store",signal:ctl?ctl.signal:undefined})
-        .then(r=>r.ok?r.json():Promise.reject(r.status))
-        .then(d=>{clearTimeout(tm);const n=Number(d&&d.value);if(!(n>0))return;
-          gn.textContent=AR2(n.toLocaleString("en").replace(/,/g,"٬"));gl.hidden=false;
-          requestAnimationFrame(()=>requestAnimationFrame(()=>gl.classList.add("show")))})
-        .catch(()=>{});
-    }catch(e){}
-  };
 })();
 </script>
 </body>
